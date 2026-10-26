@@ -23,7 +23,7 @@ export interface BackendStatusState {
   setBackendUrl: (url: string) => void;
 }
 
-const DEFAULT_BACKEND_URL = 'http://127.0.0.1:8000';
+const DEFAULT_BACKEND_URL = (import.meta as any).env?.VITE_BACKEND_URL || 'http://127.0.0.1:8000';
 
 export const useBackendStatus = create<BackendStatusState>((set, get) => ({
   status: 'checking',

@@ -113,7 +113,8 @@ export const useInspectionStore = create<InspectionState>()(
         }));
         // Background disk persistence attempt
         try {
-          fetch('http://127.0.0.1:8000/api/inspections/save', {
+          const backendBase = (import.meta as any).env?.VITE_BACKEND_URL || 'http://127.0.0.1:8000';
+          fetch(`${backendBase}/api/inspections/save`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(inspection),
@@ -133,7 +134,8 @@ export const useInspectionStore = create<InspectionState>()(
 
           if (updatedCurrent) {
             try {
-              fetch('http://127.0.0.1:8000/api/inspections/save', {
+              const backendBase = (import.meta as any).env?.VITE_BACKEND_URL || 'http://127.0.0.1:8000';
+              fetch(`${backendBase}/api/inspections/save`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(updatedCurrent),
@@ -163,7 +165,7 @@ export const useInspectionStore = create<InspectionState>()(
       },
 
       syncWithBackend: async (backendUrlOverride?: string) => {
-        const url = backendUrlOverride || 'http://127.0.0.1:8000';
+        const url = backendUrlOverride || (import.meta as any).env?.VITE_BACKEND_URL || 'http://127.0.0.1:8000';
         try {
           const res = await fetch(`${url}/api/inspections`);
           if (res.ok) {
