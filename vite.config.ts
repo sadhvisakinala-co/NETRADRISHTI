@@ -21,6 +21,6 @@ export default defineConfig({
     },
   },
   preview: {
-    allowedHosts: true,
+    allowedHosts: ['netradrishti-1.onrender.com', '.onrender.com', true],
   },
 })
